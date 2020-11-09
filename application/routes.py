@@ -7,10 +7,11 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 
 @app.route('/')
+@app.route('/home')
 def home():
     if current_user.is_authenticated:
         events = Groups.query.filter_by(user_id=current_user.id).all()
-        return render_template('home.html', title='Home', events=events)
+        return render_template('index.html', title='Home', events=events)
     return 'logged out'
 
 

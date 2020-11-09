@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block left_nav %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="btn btn-outline-success" href="{{url_for('create_event')}}"><i class="far fa-calendar-plus"></i></a>
+    </li>
+</ul>
+{% endblock left_nav %}
+{% block right_nav %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="btn btn-outline-success invisible"><i class="far fa-calendar-plus"></i></a>
+    </li>
+</ul>
+{% endblock right_nav %}
+
+{% block content %}
+
+{% for event in events %}
+<h1>{{event.events.title}}</h1>
+<h2>{{event.events.description}}</h2>
+<h3>{{event.events.date}}</h3>
+<h4>{{event.events.id}}</h4>
+{% endfor %}
+{% endblock content %}
