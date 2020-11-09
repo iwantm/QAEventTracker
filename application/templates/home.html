@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
+{% block content %}
 {% for event in events %}
 <h1>{{event.events.title}}</h1>
 <h2>{{event.events.description}}</h2>
 <h3>{{event.events.date}}</h3>
 <h4>{{event.events.id}}</h4>
 {% endfor %}
+{% endblock content %}
