@@ -1,0 +1,15 @@
+<h1>LOGIN</h1>
+<form method="POST" action=''>
+    {{form.hidden_tag()}}
+    {{form.user_name.label}}
+    {{form.user_name}}
+    <br>
+    {{form.password.label}}
+    {{form.password}}
+    <br>
+    {{form.stay_logged_in.label}}
+    {{form.stay_logged_in}}
+    <br>
+    {{ form.submit }}
+</form>
+<!--  -->
