@@ -8,7 +8,22 @@
     - [My Approach](#my-approach)
 - [Architecture](#architecture)
     - [Database](#database)
+    - [CI Pipeline](#ci-pipeline)
 - [Tracking](#tracking)
+- [Risk Assessment](#risk-assessment)
+- [Testing](#testing)
+    - [Unit Testing](#unit-testing)
+    - [Integration Testing](#integration-testing)
+- [Front-End](#front-end)
+    - [Home Page](#home-page)
+    - [Registration](#registration)
+    - [Logging In](#logging-in)
+    - [Viewing Account](#viewing-account)
+    - [Editing Account](#editing-account)
+    - [Adding Event](#adding-event)
+    - [Viewing Event](#viewing-event)
+    - [Editing Event](#editing-event)
+
 ## Brief
 
 ### Requirements
@@ -67,8 +82,47 @@ This diagram is how I thought the database would be initially, before I decided 
 
 This diagram is the final database structure with the description added to the event to allow for more information, the name removed from the user as it wasn't necessary, and the sub-table group added to allow many users to have many events.
 
+### CI Pipeline
+This will be updated once a CI pipeline is in place
+
+
 ## Tracking
 [Jira](https://iwanmoreton.atlassian.net/secure/RapidBoard.jspa?projectKey=ET&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYTI3YjZmOWI3MGVhNGQxM2JiMDYyZDY1MTI3MzYzYzciLCJwIjoiaiJ9) was used to track the progress of the project.
 ![Imgur](https://i.imgur.com/xsUwKVu.png)
 I used Jira to create 2 epics, one for the user account system and one for the events, these were then split into user stories created as issues. This allowed me to create different sprints for the project consisting of various issues. Each issue was set a priority for the application and given story points dependant on how much time I believed it would take to complete. The Jira board allowed me to check the backlog to see which feature needed compeleting and then to add similar features to a sprint, which then allowed me for each issue of the sprint to track whether the issue was 'in progress' or done. This would also allow me to create reports for bigger projects.
+
+## Risk Assessment
+The full risk assessment can be found [here](https://docs.google.com/spreadsheets/d/1Q3bw1Kq9GwS-QO11yzzbHXt3JxtC32gwJgP5J90frmQ/edit?usp=sharing).
+
+![Imgur](https://i.imgur.com/1nbF4hl.png)
+
+## Testing
+### Unit Testing
+Pytest is used for unit testing the application. These tests are designed to check that the outputs from the application are correct.These are then used to produce a report allowing me to check the coverage of the tests.
+### Integration Testing
+Selenium is used for integration testing. These tests are designed to make sure that the front end of the application is working as expected and that it produces the correct outcome.
+
+## Front-End
+The front-end of the application is built using HTML and the Bootstrap framework. It's functional and allows the user to achieve every thing set out.
+### Home Page
+
+### Registration
+
+### Logging In
+
+### Viewing Account
+
+### Editing Account
+
+### Adding Event
+
+### Viewing Event
+
+### Editing Event
+
+
+
+
+
+
 
