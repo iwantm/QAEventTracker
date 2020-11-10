@@ -10,7 +10,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 @app.route('/home')
 def home():
     if current_user.is_authenticated:
-        events = Groups.query.filter_by(user_id=current_user.id).all()
+        events = Groups.query.filter_by(
+            user_id=current_user.id).join(Events).order_by(Events.date).all()
         return render_template('index.html', title='Home', events=events)
     return redirect(url_for('login'))
 
