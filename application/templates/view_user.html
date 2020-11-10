@@ -13,9 +13,12 @@
         <a class="btn btn-outline-primary" href="{{url_for('update_user')}}"><i class="fas fa-pen"></i></a>
     </li>
 </ul>
+
 {% endblock right_nav %}
 {% block content %}
 <h1>VIEW USER</h1>
 {{account.user_name}}
 {{account.email}}
+<a class="btn btn-outline-warning" href="{{url_for('logout')}}"> Log</a>
+<a class="btn btn-outline-danger" href="{{url_for('delete_account')}}">Delete Account</a>
 {% endblock content %}

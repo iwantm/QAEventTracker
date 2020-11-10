@@ -19,6 +19,7 @@
 <h1>VIEW EVENT</h1>
 <h2>{{event.events.title}} </h2>
 <h3>created by {{event.users.user_name}}</h3>
+<a class="btn btn-outline-danger" href="{{url_for('delete_event', id=event.events.id)}}">Delete Event</a>
 {{event.events.description}}
 {{event.events.date}}
 
