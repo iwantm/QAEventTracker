@@ -13,19 +13,21 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
-        {% block left_nav %}
-        {% endblock left_nav %}
-        <a class="navbar-brand navbar-center" href="{{url_for('home')}}">
-            <i class="far fa-calendar"></i>
-        </a>
-        {% block right_nav %}
-        {% endblock right_nav %}
+    <div class="container-fluid">
+        <nav class="navbar navbar-light bg-light">
+            {% block left_nav %}
+            {% endblock left_nav %}
+            <a class="navbar-brand navbar-center" href="{{url_for('home')}}">
+                <i class="far fa-calendar"></i>
+            </a>
+            {% block right_nav %}
+            {% endblock right_nav %}
 
-    </nav>
+        </nav>
 
-    {% block content %}
-    {% endblock content %}
+        {% block content %}
+        {% endblock content %}
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

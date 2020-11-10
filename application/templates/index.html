@@ -16,9 +16,24 @@
 
 {% block content %}
 
-{% for event in events %}
-<h1>{{event.events.title}}</h1>
-<a href="{{url_for('event_view', id=event.events.id)}}"> link to event </a>
-<h4>{{event.events.id}}</h4>
-{% endfor %}
+<table class="table table-hover table-borderless">
+    <thead class="bg-light">
+        <tr>
+            <th>Event Title</th>
+            <th>Event Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{event.events.title}}</td>
+            <td>{{event.events.date.day}}/{{event.events.date.month}}/{{event.events.date.year}}</td>
+            <td><a href="{{url_for('event_view', id=event.events.id)}}"
+                    class="btn btn-outline-primary float-right mr-1"> <i class="fas fa-calendar-day"></i></a></td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}
