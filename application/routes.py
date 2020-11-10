@@ -12,7 +12,7 @@ def home():
     if current_user.is_authenticated:
         events = Groups.query.filter_by(user_id=current_user.id).all()
         return render_template('index.html', title='Home', events=events)
-    return url_for('login')
+    return redirect(url_for('login'))
 
 # User Routes
 
@@ -31,6 +31,7 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('home'))
     return render_template('register.html', title='New User', form=form)
 
