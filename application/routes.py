@@ -12,7 +12,9 @@ def home():
     if current_user.is_authenticated:
         events = Groups.query.filter_by(user_id=current_user.id).all()
         return render_template('index.html', title='Home', events=events)
-    return 'logged out'
+    return url_for('login')
+
+# User Routes
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -53,13 +55,6 @@ def logout():
     return(redirect(url_for('home')))
 
 
-@app.route('/event/<int:id>')
-@login_required
-def event_view(id):
-    events = Groups.query.filter_by(user_id=current_user.id).all()
-    return(type(events[0]))
-
-
 @app.route('/user/delete')
 @login_required
 def delete_account():
@@ -79,12 +74,21 @@ def update_user():
         current_user.user_name = form.user_name.data
         current_user.email = form.email.data
         db.session.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('view_user'))
     elif request.method == 'GET':
         form.user_name.data = current_user.user_name
         form.email.data = current_user.email
 
     return render_template('edit_user.html', title='Edit Account', form=form)
+
+
+@app.route('/user', methods=['GET'])
+@login_required
+def view_user():
+    account = Users.query.get(current_user.id)
+    return render_template('view_user.html', title='My Account', account=account)
+
+# Event Routes
 
 
 @app.route('/event/create', methods=['GET', 'POST'])
@@ -105,8 +109,7 @@ def create_event():
         )
         db.session.add(new_group)
         db.session.commit()
-        return(str(new_group.id))
-        # return redirect(url_for('home'))
+        return redirect(url_for('home'))
 
     return render_template('new_event.html', title='Add Event', form=form)
 
@@ -132,9 +135,22 @@ def edit_event(id):
         current.description = form.description.data
         current.date = form.date.data
         db.session.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('event_view', id=id))
     elif request.method == 'GET':
         form.title.data = current.title
         form.description.data = current.description
         form.date.data = current.date
     return render_template('new_event.html', title='Add Event', form=form)
+
+
+@app.route('/event/<int:id>')
+@login_required
+def event_view(id):
+    event = Groups.query.filter_by(
+        user_id=current_user.id,
+        event_id=id
+    ).first()
+    if event:
+        return render_template('view_event.html', title=event.events.title, event=event)
+    else:
+        return redirect(url_for('home'))

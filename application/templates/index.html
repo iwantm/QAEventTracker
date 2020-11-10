@@ -9,7 +9,7 @@
 {% block right_nav %}
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="btn btn-outline-success invisible"><i class="far fa-calendar-plus"></i></a>
+        <a class="btn btn-outline-secondary" href="{{url_for('view_user')}}"><i class=" far fa-user"></i></a>
     </li>
 </ul>
 {% endblock right_nav %}
@@ -18,7 +18,7 @@
 
 {% for event in events %}
 <h1>{{event.events.title}}</h1>
-<a href=""> link to event </a>
+<a href="{{url_for('event_view', id=event.events.id)}}"> link to event </a>
 <h4>{{event.events.id}}</h4>
 {% endfor %}
 {% endblock content %}
