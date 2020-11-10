@@ -56,6 +56,7 @@ To meet these requirements I have decided to create an event tracking applicatio
 The database structure has changed during development with the changes shown in the below ERD diagrams.
 
 ![Imgur](https://i.imgur.com/wG0J7qh.png)
+
 This diagram is how I thought the database would be initially, before I decided that the relationship between users and events should be many-to-many
 
 ![Imgur](https://i.imgur.com/vR6iOTW.png)
