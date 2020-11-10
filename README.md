@@ -36,16 +36,26 @@ server and deployed to a cloud-based virtual machine.
 ### My Approach
 To meet these requirements I have decided to create an event tracking application that will allow the user to:
 - Create an account that stores:
-    - Username
-    - Email
-    - Password
+    - **Username**
+    - **Email**
+    - **Password**
 - Create events that store:
-    - Title of the event
-    - Description of the event
-    - Date of the event
+    - **Title** of the event
+    - **Description** of the event
+    - **Date** of the event
 - View and update account information
 - View and update events
 - Delete accounts and events
 #### Stretch Goal
 - Invite other users to events
 - See events in a calendar format
+
+## Architecture
+
+### Database
+The database structure has changed during development with the changes shown in the below ERD diagrams.
+
+![Imgur](https://i.imgur.com/wG0J7qh.png)
+This diagram is how I thought the database would be initially, before I decided that the relationship between users and events should be many-to-many
+
+![Imgur](https://i.imgur.com/vR6iOTW.png)
