@@ -5,8 +5,11 @@
 ## Contents
 - [Brief](#brief)
     - [Requirements](#requirements)
+    - [My Approach](#my-approach)
 ## Brief
+
 ### Requirements
+
 The requirements the project had to meet were:
 - A Trello board (or equivalent Kanban board tech) with full expansion
 on user stories, use cases and tasks needed to complete the project.
@@ -29,3 +32,20 @@ reports and evidence to support a TDD approach.
 - Code fully integrated into a Version Control System using the
 Feature-Branch model which will subsequently be built through a CI
 server and deployed to a cloud-based virtual machine.
+
+### My Approach
+To meet these requirements I have decided to create an event tracking application that will allow the user to:
+- Create an account that stores:
+    - Username
+    - Email
+    - Password
+- Create events that store:
+    - Title of the event
+    - Description of the event
+    - Date of the event
+- View and update account information
+- View and update events
+- Delete accounts and events
+#### Stretch Goal
+- Invite other users to events
+- See events in a calendar format
