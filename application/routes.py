@@ -53,6 +53,13 @@ def logout():
     return(redirect(url_for('home')))
 
 
+@app.route('/event/<int:id>')
+@login_required
+def event_view(id):
+    events = Groups.query.filter_by(user_id=current_user.id).all()
+    return(type(events[0]))
+
+
 @app.route('/user/delete')
 @login_required
 def delete_account():
