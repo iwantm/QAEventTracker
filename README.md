@@ -6,6 +6,9 @@
 - [Brief](#brief)
     - [Requirements](#requirements)
     - [My Approach](#my-approach)
+- [Architecture](#architecture)
+    - [Database](#database)
+- [Tracking](#tracking)
 ## Brief
 
 ### Requirements
@@ -49,6 +52,7 @@ To meet these requirements I have decided to create an event tracking applicatio
 #### Stretch Goal
 - Invite other users to events
 - See events in a calendar format
+- Reoccuring events
 
 ## Architecture
 
@@ -61,4 +65,10 @@ This diagram is how I thought the database would be initially, before I decided 
 
 ![Imgur](https://i.imgur.com/vR6iOTW.png?1)
 
-This diagram is the final database structure with the description added to the event to allow for more information, the name removed from the user as it wasn't necessary, and the subtable group added to allow many users to have many events.
+This diagram is the final database structure with the description added to the event to allow for more information, the name removed from the user as it wasn't necessary, and the sub-table group added to allow many users to have many events.
+
+## Tracking
+[Jira](https://iwanmoreton.atlassian.net/secure/RapidBoard.jspa?projectKey=ET&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYTI3YjZmOWI3MGVhNGQxM2JiMDYyZDY1MTI3MzYzYzciLCJwIjoiaiJ9) was used to track the progress of the project.
+![Imgur](https://i.imgur.com/xsUwKVu.png)
+I used Jira to create 2 epics, one for the user account system and one for the events, these were then split into user stories created as issues. This allowed me to create different sprints for the project consisting of various issues. Each issue was set a priority for the application and given story points dependant on how much time I believed it would take to complete. The Jira board allowed me to check the backlog to see which feature needed compeleting and then to add similar features to a sprint, which then allowed me for each issue of the sprint to track whether the issue was 'in progress' or done. This would also allow me to create reports for bigger projects.
+
