@@ -59,4 +59,4 @@ The database structure has changed during development with the changes shown in 
 
 This diagram is how I thought the database would be initially, before I decided that the relationship between users and events should be many-to-many
 
-![Imgur](https://i.imgur.com/vR6iOTW.png)
+![Imgur](https://imgur.com/vR6iOTW)
