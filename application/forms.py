@@ -31,13 +31,12 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    user_name = StringField('Username',
-                            validators=[DataRequired(),
-                                        ]
-                            )
+    username = StringField('Username',
+                           validators=[DataRequired(),
+                                       ]
+                           )
     password = PasswordField('Password',
                              validators=[DataRequired()])
-    stay_logged_in = BooleanField('Stay Logged In')
     submit = SubmitField('Log In')
 
 

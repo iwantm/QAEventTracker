@@ -3,14 +3,9 @@
 
 <form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.user_name(class="form-control mt-2",placeholder="Username")}}
+    {{form.username(class="form-control mt-2",placeholder="Username")}}
     {{form.password(class="form-control mt-2", placeholder="Password")}}
-    <div class="form-check mt-1">
-        {{form.stay_logged_in(class="form-check-input")}}
-        <label class="form-check-label" for="defaultCheck1">
-            Stay logged in
-        </label>
-    </div>
+
     {{ form.submit(class="btn btn-outline-primary btn-block mt-2") }}
     <a class="btn btn-outline-success btn-block" href="{{url_for('register')}}">New Account</a>
 </form>

@@ -1,4 +1,3 @@
-from threading import Event
 from application import app, db, bcrypt
 from flask import render_template, redirect, url_for, request
 from application.forms import EventForm, RegistrationForm, LoginForm, UpdateAccountForm, EditEventForm
@@ -8,12 +7,11 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route('/')
 @app.route('/home')
+@login_required
 def home():
-    if current_user.is_authenticated:
-        events = Groups.query.filter_by(
-            user_id=current_user.id).join(Events).order_by(Events.date).all()
-        return render_template('index.html', title='Home', events=events)
-    return redirect(url_for('login'))
+    events = Groups.query.filter_by(
+        user_id=current_user.id).join(Events).order_by(Events.date).all()
+    return render_template('index.html', title='Home', events=events)
 
 # User Routes
 
@@ -43,9 +41,9 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = Users.query.filter_by(user_name=form.user_name.data).first()
+        user = Users.query.filter_by(user_name=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.stay_logged_in.data)
+            login_user(user)
             return redirect(url_for('home'))
     return render_template('login.html', title='Login', form=form)
 
