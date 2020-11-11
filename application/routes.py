@@ -62,6 +62,12 @@ def logout():
 def delete_account():
     user_id = current_user.id
     user = Users.query.filter_by(id=user_id).first()
+    group = Groups.query.filter_by(user_id=user_id).all()
+    for event in group:
+        event_table = Events.query.filter_by(id=event.event_id).first()
+        db.session.delete(event)
+        db.session.delete(event_table)
+
     logout_user()
     db.session.delete(user)
     db.session.commit()
