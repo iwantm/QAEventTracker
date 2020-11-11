@@ -16,11 +16,21 @@
 </ul>
 {% endblock right_nav %}
 {% block content %}
-<h1>VIEW EVENT</h1>
-<h2>{{event.events.title}} </h2>
-<h3>created by {{event.users.user_name}}</h3>
-<a class="btn btn-outline-danger" href="{{url_for('delete_event', id=event.events.id)}}">Delete Event</a>
-{{event.events.description}}
-{{event.events.date}}
+<div class="d-flex justify-content-center ">
+    <div class="align-self-center flex-column">
+        <h1 class="text-center">{{event.events.title}} on
+            {{event.events.date.day}}/{{event.events.date.month}}/{{event.events.date.year}}</h1>
+        <h3 class="text-center"> created by {{event.users.user_name}}</h3>
+        <h4 class="text-center"> {{event.events.description}}</h4>
+    </div>
+
+</div>
+<div class="d-flex justify-content-center">
+    <div class="align-self-center flex-column w-100">
+        <a class="btn btn-outline-danger btn-block" href="{{url_for('delete_event', id=event.events.id)}}">Delete
+            Event</a>
+    </div>
+</div>
+
 
 {% endblock content %}
