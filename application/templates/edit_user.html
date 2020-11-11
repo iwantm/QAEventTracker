@@ -1,13 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method="POST" action=''>
+<form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.user_name.label}}
-    {{form.user_name}}
-    <br>
-    {{form.email.label}}
-    {{form.email}}
-    <br>
-    {{ form.submit }}
+    {{form.user_name(class="form-control mt-2",placeholder="Username")}}
+    {{form.email(class="form-control mt-2",placeholder="name@example.com")}}
+    {{ form.submit(class="btn btn-outline-success btn-block mt-2") }}
 </form>
 {% endblock content %}

@@ -1,20 +1,19 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<h1>LOGIN</h1>
-<form method="POST" action=''>
+<form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.user_name.label}}
-    {{form.user_name}}
-    <br>
-    {{form.password.label}}
-    {{form.password}}
-    <br>
-    {{form.stay_logged_in.label}}
-    {{form.stay_logged_in}}
-    <br>
-    {{ form.submit }}
+    {{form.user_name(class="form-control mt-2",placeholder="Username")}}
+    {{form.password(class="form-control mt-2", placeholder="Password")}}
+    <div class="form-check mt-1">
+        {{form.stay_logged_in(class="form-check-input")}}
+        <label class="form-check-label" for="defaultCheck1">
+            Stay logged in
+        </label>
+    </div>
+    {{ form.submit(class="btn btn-outline-primary btn-block mt-2") }}
+    <a class="btn btn-outline-success btn-block" href="{{url_for('register')}}">New Account</a>
 </form>
-<a class="btn btn-outline-primary" href="{{url_for('register')}}">New Account</a>
+
 
 {% endblock content %}
