@@ -1,14 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method="POST" action=''>
+<form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.title.label}}
-    {{form.title}}
-    <br>
-    {{form.description.label}}
-    {{form.description}}
-    <br>
-    {{form.date}}
-    {{ form.submit }}
+    {{form.title(class="form-control mt-2",placeholder="Event Title")}}
+    {{form.description(class="form-control mt-2",placeholder="Event Description")}}
+    {{form.date(class="form-control mt-2",placeholder="DD/MM/YYYY")}}
+    {{ form.submit(class="btn btn-outline-success btn-block mt-2") }}
 </form>
 {% endblock content %}

@@ -148,7 +148,7 @@ def edit_event(id):
         form.title.data = current.title
         form.description.data = current.description
         form.date.data = current.date
-    return render_template('new_event.html', title='Add Event', form=form)
+    return render_template('new_event.html', title='Edit Event', form=form)
 
 
 @app.route('/event/<int:id>')
