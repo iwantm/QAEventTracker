@@ -198,7 +198,7 @@ class TestEventForms(TestBase):
         time.sleep(1)
         assert url_for('home') in self.driver.current_url
         event_text = self.driver.find_element_by_xpath(
-            '/html/body/div/table/tbody/tr[2]/td[1]').text
+            '/html/body/div/table/tbody/tr[1]/td[1]').text
         assert event_text == 'tester event'
 
 
