@@ -37,6 +37,8 @@ class TestBase(LiveServerTestCase):
         self.driver = webdriver.Chrome(
             executable_path=getenv('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
+        db.drop_all()
+        db.create_all()
         new_user1 = Users(user_name='user1',
                           email='user1@user.com',
                           password=bcrypt.generate_password_hash('password'))
@@ -61,8 +63,6 @@ class TestBase(LiveServerTestCase):
         db.session.add(new_group1)
         db.session.add(new_group2)
         db.session.commit()
-        db.drop_all()
-        db.create_all()
 
     def tearDown(self):
         self.driver.quit()
@@ -93,14 +93,15 @@ class TestUserForms(TestBase):
         assert url_for('home') in self.driver.current_url
 
     def test_login(self):
+        user = Users.query.all().first()
         self.driver.find_element_by_xpath(
-            '/html/body/div/form/input[2]').send_keys('user1')
+            '/html/body/div/form/input[2]').send_keys(user.user_name)
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[3]').send_keys('password')
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[4]').click()
         time.sleep(1)
-        assert current_user.is_authenticated
+        print(self.driver.data)
         assert url_for('home') in self.driver.current_url
 
 
