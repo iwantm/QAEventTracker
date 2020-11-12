@@ -23,6 +23,7 @@
     - [Adding Event](#adding-event)
     - [Viewing Event](#viewing-event)
     - [Editing Event](#editing-event)
+- [Improvements](#improvements)
 
 ## Brief
 
@@ -98,12 +99,12 @@ The full risk assessment can be found [here](https://docs.google.com/spreadsheet
 
 ## Testing
 ### Unit Testing
-Pytest is used for unit testing the application. These tests are designed to check that the outputs from the application are correct. These are then used to produce a report allowing me to check the coverage of the tests.
+Pytest is used for unit testing the application. These tests are designed to check that the outputs from the endpoints of the application are correct. These are then used to produce a report allowing me to check the coverage of the tests. This allows me to check which endpoints of the application still need testing.
 ![Imgur](https://i.imgur.com/UxBaUiv.png)
 Pytest also allows you to produce a coverage report in HTML to show how far the app has been tested.
 ![Imgur](https://i.imgur.com/cFEM6td.png)
 ### Integration Testing
-Selenium is used for integration testing. These tests are designed to make sure that the front end of the application is working as expected and that it produces the correct outcome.
+Selenium is used for integration testing. As unit testing doesn't allow for the front-end to be tested as the user would see it, this is used to check if the routes work as expected when controlled how a user would interact with the website. This is done using the chromedriver and chromium to interact with the various front-end elements.
 
 ## Front-End
 The front-end of the application is built using HTML and the Bootstrap framework. It's functional and allows the user to achieve every thing set out.
@@ -123,6 +124,17 @@ The front-end of the application is built using HTML and the Bootstrap framework
 
 ### Editing Event
 
+## Improvements
+There are a number of improvements that could be made to the application to make for a better user experience:
+- Implementation of groups (properly) to allow for a user to select a group and then invite all members of that group.
+- User acceptable invites, rather than the user being added directly.
+- Automatic deletion of events that have passed.
+- A user account system that allows for friends, profile pictures and more information about the user.
+- A UI using JS and more CSS to make it more interactable and appealing.
+- Turn the Jenkins server into an auto polling CI/CD pipeline. 
+
+## Author
+Iwan Moreton
 
 
 
