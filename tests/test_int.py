@@ -53,9 +53,23 @@ class TestRegistration(TestBase):
         self.driver.find_element_by_xpath(
             "/html/body/div/form/a").click()
         time.sleep(1)
-
+        # Fill in registration form
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys(test_admin_user_name)
+        self.driver.find_element_by_xpath('/html/body/div/form/input[3]').send_keys(
+            test_admin_email)
+        self.driver.find_element_by_xpath('/html/body/div/form/input[4]').send_keys(
+            test_admin_password)
+        self.driver.find_element_by_xpath('/html/body/div/form/input[5]').send_keys(
+            test_admin_password)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[6]').click()
+        time.sleep(1)
+        users = Users.query.all()
+        user = Users.query.filter_by(user_name=test_admin_user_name).first()
+        print(user)
         # Assert that browser redirects to login page
-        assert url_for('register') in self.driver.current_url
+        assert url_for('home') in self.driver.current_url
 
 
 if __name__ == '__main__':
