@@ -246,7 +246,7 @@ class TestEventForms(TestBase):
             '/html/body/div/div[1]/div/h1').text
         assert edit_event_text != event_text
 
-    def test_edit_event(self):
+    def test_add_user_event(self):
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('user1')
         self.driver.find_element_by_xpath(
