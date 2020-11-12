@@ -175,5 +175,32 @@ class TestUserForms(TestBase):
         assert user not in users
 
 
+class TestEventForms(TestBase):
+    def test_add_event(self):
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/nav/ul[1]/li/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('tester event')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('tester event')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').send_keys('11/08/2020')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[5]').click()
+        time.sleep(1)
+        assert url_for('home') in self.driver.current_url
+        event_text = self.driver.find_element_by_xpath(
+            '/html/body/div/table/tbody/tr[2]/td[1]').text
+        assert event_text == 'tester event'
+
+
 if __name__ == '__main__':
     unittest.main(port=5000)
