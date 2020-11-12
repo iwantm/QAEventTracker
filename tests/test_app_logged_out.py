@@ -6,7 +6,7 @@ from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required, login_manager
 
 
-class TestViewsLoggedIn(TestBase):
+class TestViewsLoggedOut(TestBase):
     def test_get_index_logged_out(self):
         res = self.client.get(url_for('login'), follow_redirects=True)
         print(res.data)
