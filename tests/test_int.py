@@ -31,12 +31,11 @@ class TestBase(LiveServerTestCase):
         chrome_options = Options()
         chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument('--headless')
-
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument("--remote-debugging-port=9222")  # this
+        chrome_options.add_argument("–no-sandbox")
         self.driver = webdriver.Chrome(
             executable_path="/home/iwantm/QA/chromedriver", chrome_options=chrome_options)
-        self.driver.get("https://google.com")
+        self.driver.get("http://localhost:5000")
         db.session.commit()
         db.drop_all()
         db.create_all()
@@ -45,8 +44,11 @@ class TestBase(LiveServerTestCase):
         self.driver.quit()
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
-    def test_server_is_up_and_running(self):
-        response = urlopen("https://google.com")
+
+class TestRegistration(TestBase):
+
+    def test_registration(self):
+        response = urlopen("http://localhost:5000")
         self.assertEqual(response.code, 200)
 
 
