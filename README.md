@@ -98,7 +98,10 @@ The full risk assessment can be found [here](https://docs.google.com/spreadsheet
 
 ## Testing
 ### Unit Testing
-Pytest is used for unit testing the application. These tests are designed to check that the outputs from the application are correct.These are then used to produce a report allowing me to check the coverage of the tests.
+Pytest is used for unit testing the application. These tests are designed to check that the outputs from the application are correct. These are then used to produce a report allowing me to check the coverage of the tests.
+![Imgur](https://i.imgur.com/UxBaUiv.png)
+Pytest also allows you to produce a coverage report in HTML to show how far the app has been tested.
+![Imgur](https://i.imgur.com/cFEM6td.png)
 ### Integration Testing
 Selenium is used for integration testing. These tests are designed to make sure that the front end of the application is working as expected and that it produces the correct outcome.
 
