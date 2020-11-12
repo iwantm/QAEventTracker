@@ -239,6 +239,8 @@ class TestEventForms(TestBase):
             '/html/body/div/form/input[2]').clear()
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('edit event')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[5]').click()
         assert url_for('event_view', id=1) in self.driver.current_url
         edit_event_text = self.driver.find_element_by_xpath(
             '/html/body/div/div[1]/div/h1').text
