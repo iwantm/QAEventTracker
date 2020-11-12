@@ -21,16 +21,16 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-        new_user1 = Users(user_name='user_int1',
-                          email='user_int1@user.com',
+        new_user1 = Users(user_name='user1',
+                          email='user1@user.com',
                           password=bcrypt.generate_password_hash('password'))
-        new_user2 = Users(user_name='user_int2',
-                          email='user_int2@user.com',
+        new_user2 = Users(user_name='user2',
+                          email='user2@user.com',
                           password=bcrypt.generate_password_hash('password2'))
-        new_event1 = Events(title='Event_int1',
+        new_event1 = Events(title='Event1',
                             description='desc1',
                             date=datetime(2020, 12, 13, 00, 00, 00))
-        new_event2 = Events(title='Event_int2',
+        new_event2 = Events(title='Event2',
                             description='desc2',
                             date=datetime(2020, 12, 13, 00, 00, 00))
         db.session.add(new_user1)
