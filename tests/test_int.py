@@ -198,8 +198,26 @@ class TestEventForms(TestBase):
         time.sleep(1)
         assert url_for('home') in self.driver.current_url
         event_text = self.driver.find_element_by_xpath(
-            '/html/body/div/table/tbody/tr[2]/td[1]').text
+            '/html/body/div/table/tbody/tr[1]/td[1]').text
         assert event_text == 'tester event'
+
+    def test_delete_event(self):
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
+        time.sleep(1)
+        event = Events.query.filter_by(title='Event1').first()
+        self.driver.find_element_by_xpath(
+            '/html/body/div/table/tbody/tr[1]/td[3]/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/div[2]/div/a[2]').click()
+        events = Events.query.all()
+        assert url_for('home') in self.driver.current_url
+        assert event not in events
 
 
 if __name__ == '__main__':
