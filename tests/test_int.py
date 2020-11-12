@@ -112,6 +112,10 @@ class TestUserForms(TestBase):
         self.driver.find_element_by_xpath(
             '/html/body/div/nav/ul[2]/li/a').click()
         time.sleep(1)
+        user = self.driver.find_element_by_xpath(
+            '/html/body/div/div[1]/div/h1').text
+        email = self.driver.find_element_by_xpath(
+            '/html/body/div/div[1]/div/h3').text
         self.driver.find_element_by_xpath(
             '/html/body/div/nav/ul[2]/li/a').click()
         time.sleep(1)
@@ -126,12 +130,14 @@ class TestUserForms(TestBase):
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[4]').click()
         time.sleep(1)
+
         assert url_for('view_user') in self.driver.current_url
-        idk = self.driver.find_element_by_xpath(
+        new_user = self.driver.find_element_by_xpath(
             '/html/body/div/div[1]/div/h1').text
-        print(idk)
-        print(self.driver.current_url)
-        assert False
+        new_email = self.driver.find_element_by_xpath(
+            '/html/body/div/div[1]/div/h3').text
+        assert new_user != user
+        assert new_email != email
 
 
 if __name__ == '__main__':
