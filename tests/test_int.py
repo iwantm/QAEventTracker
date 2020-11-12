@@ -219,7 +219,7 @@ class TestEventForms(TestBase):
         assert url_for('home') in self.driver.current_url
         assert event not in events
 
-    def test_delete_event(self):
+    def test_edit_event(self):
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('user1')
         self.driver.find_element_by_xpath(
@@ -239,7 +239,7 @@ class TestEventForms(TestBase):
             '/html/body/div/form/input[2]').clear()
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('edit event')
-        assert url_for('event', id=1) in self.driver.current_url
+        assert url_for('event_view', id=1) in self.driver.current_url
         edit_event_text = self.driver.find_element_by_xpath(
             '/html/body/div/div[1]/div/h1').text
         assert edit_event_text != event_text
