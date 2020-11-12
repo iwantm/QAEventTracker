@@ -139,6 +139,22 @@ class TestUserForms(TestBase):
         assert new_user != user
         assert new_email != email
 
+    def test_update_user(self):
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/nav/ul[2]/li/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/div[2]/div/a[2]').click()
+        time.sleep(1)
+        assert url_for('login') in self.driver.current_url
+
 
 if __name__ == '__main__':
     unittest.main(port=5000)
