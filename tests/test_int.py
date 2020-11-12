@@ -111,6 +111,9 @@ class TestUserForms(TestBase):
         time.sleep(1)
         self.driver.find_element_by_xpath(
             '/html/body/div/nav/ul[2]/li/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/nav/ul[2]/li/a').click()
         print(self.driver.current_url)
         assert False
 
