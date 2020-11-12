@@ -155,6 +155,25 @@ class TestUserForms(TestBase):
         time.sleep(1)
         assert url_for('login') in self.driver.current_url
 
+    def test_delete_user(self):
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        user = Users.query.filter_by(user_name='user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/nav/ul[2]/li/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/div[2]/div/a[1]').click()
+        time.sleep(1)
+        users = Users.query.all()
+        assert url_for('login') in self.driver.current_url
+        assert user not in users
+
 
 if __name__ == '__main__':
     unittest.main(port=5000)
