@@ -26,6 +26,7 @@
 </div>
 <div class="d-flex justify-content-center">
     <div class="align-self-center flex-column w-100">
+        <a class="btn btn-outline-success btn-block" href="{{url_for('add_user', id=event.events.id)}}">Add User</a>
         <a class="btn btn-outline-danger btn-block" href="{{url_for('delete_event', id=event.events.id)}}">Delete
             Event</a>
     </div>
