@@ -258,7 +258,7 @@ class TestEventForms(TestBase):
             '/html/body/div/table/tbody/tr[1]/td[3]/a').click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
-            '/html/body/div/div[2]/div/a[2]').click()
+            '/html/body/div/div[2]/div/a[1]').click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('user2')
