@@ -65,6 +65,7 @@ class TestBase(LiveServerTestCase):
 
     def tearDown(self):
         self.driver.quit()
+        db.drop_all()
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
 
