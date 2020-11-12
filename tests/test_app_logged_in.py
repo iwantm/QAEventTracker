@@ -186,3 +186,44 @@ class TestLoggedIn(TestBase):
             test_string2 = 'value="'+event_description+'"'
             self.assertIn(str.encode(test_string1), res.data)
             self.assertIn(str.encode(test_string2), res.data)
+
+    def test_multi_user(self):
+        with self.client:
+            log = self.client.get(url_for('auto_login'))
+            group = Groups.query.filter_by(user_id=current_user.id).first()
+            event = Events.query.filter_by(id=group.event_id).first()
+            res = self.client.post(
+                url_for("add_user", id=event.id),
+                data=dict(user_name='user2')
+            )
+            new_user = Users.query.filter_by(user_name='user2').first()
+            print(new_user)
+            new_group = Groups.query.filter_by(user_id=new_user.id,
+                                               event_id=event.id).first()
+            print(res.data)
+            self.assertEqual(new_group.event_id, group.event_id)
+
+    def test_multi_user_no_access(self):
+        with self.client:
+            log = self.client.get(url_for('auto_login'))
+            new_user = Users.query.filter_by(user_name='user2').first()
+            group = Groups.query.filter_by(user_id=new_user.id).first()
+            event = Events.query.filter_by(id=group.event_id).first()
+            res = self.client.post(
+                url_for("add_user", id=event.id),
+                data=dict(user_name='user2'),
+                follow_redirects=True
+            )
+            self.assertEqual(res.status_code, 200)
+            self.assertIn(b'Home', res.data)
+
+    def test_multi_user_get(self):
+        with self.client:
+            log = self.client.get(url_for('auto_login'))
+            group = Groups.query.filter_by(user_id=current_user.id).first()
+            event = Events.query.filter_by(id=group.event_id).first()
+            res = self.client.get(
+                url_for("add_user", id=event.id),
+            )
+            self.assertEqual(res.status_code, 200)
+            self.assertIn(str.encode(event.title), res.data)
