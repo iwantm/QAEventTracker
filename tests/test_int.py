@@ -264,7 +264,7 @@ class TestEventForms(TestBase):
             '/html/body/div/form/input[2]').send_keys('user2')
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[3]').click()
-        groups = Groups.query.filter_by(event_id=1)
+        groups = Groups.query.filter_by(event_id=1).all()
         assert len(groups) == 2
         assert url_for('event_view', id=1) in self.driver.current_url
 
