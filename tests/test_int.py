@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options
 from application import app, db, bcrypt
 from application.models import Users, Events, Groups
 from datetime import datetime
+from flask_login import login_user, current_user, logout_user, login_required, login_manager
 test_admin_user_name = "admin"
 test_admin_email = "admin@email.com"
 test_admin_password = "admin2020"
@@ -93,9 +94,14 @@ class TestUserForms(TestBase):
 
     def test_login(self):
         self.driver.find_element_by_xpath(
-            "/html/body/div/form/a").click()
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
         time.sleep(1)
-        assert url_for('login') in self.driver.current_url
+        assert current_user.is_authenticated
+        assert url_for('home') in self.driver.current_url
 
 
 if __name__ == '__main__':
