@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from application import app, db, bcrypt
 from application.models import Users, Events, Groups
-
+from datetime import datetime
 test_admin_user_name = "admin"
 test_admin_email = "admin@email.com"
 test_admin_password = "admin2020"
@@ -34,8 +34,31 @@ class TestBase(LiveServerTestCase):
         chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.add_argument("–no-sandbox")
         self.driver = webdriver.Chrome(
-            executable_path="/home/iwantm/QA/chromedriver", chrome_options=chrome_options)
+            executable_path=getenv('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
+        new_user1 = Users(user_name='user1',
+                          email='user1@user.com',
+                          password=bcrypt.generate_password_hash('password'))
+        new_user2 = Users(user_name='user2',
+                          email='user2@user.com',
+                          password=bcrypt.generate_password_hash('password2'))
+        new_event1 = Events(title='Event1',
+                            description='desc1',
+                            date=datetime(2020, 12, 13, 00, 00, 00))
+        new_event2 = Events(title='Event2',
+                            description='desc2',
+                            date=datetime(2020, 12, 13, 00, 00, 00))
+        db.session.add(new_user1)
+        db.session.add(new_user2)
+        db.session.add(new_event1)
+        db.session.add(new_event2)
+        db.session.commit()
+        new_group1 = Groups(user_id=new_user1.id,
+                            event_id=new_event1.id)
+        new_group2 = Groups(user_id=new_user2.id,
+                            event_id=new_event2.id)
+        db.session.add(new_group1)
+        db.session.add(new_group2)
         db.session.commit()
         db.drop_all()
         db.create_all()
@@ -45,15 +68,12 @@ class TestBase(LiveServerTestCase):
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
 
-class TestRegistration(TestBase):
+class TestUserForms(TestBase):
 
     def test_registration(self):
-
-        # Click register menu link
         self.driver.find_element_by_xpath(
             "/html/body/div/form/a").click()
         time.sleep(1)
-        # Fill in registration form
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys(test_admin_user_name)
         self.driver.find_element_by_xpath('/html/body/div/form/input[3]').send_keys(
@@ -68,8 +88,14 @@ class TestRegistration(TestBase):
         users = Users.query.all()
         user = Users.query.filter_by(user_name=test_admin_user_name).first()
         print(user)
-        # Assert that browser redirects to login page
+        assert user in users
         assert url_for('home') in self.driver.current_url
+
+    def test_login(self):
+        self.driver.find_element_by_xpath(
+            "/html/body/div/form/a").click()
+        time.sleep(1)
+        assert url_for('login') in self.driver.current_url
 
 
 if __name__ == '__main__':
