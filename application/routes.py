@@ -1,6 +1,6 @@
 from application import app, db, bcrypt
 from flask import render_template, redirect, url_for, request
-from application.forms import EventForm, RegistrationForm, LoginForm, UpdateAccountForm, EditEventForm
+from application.forms import EventForm, RegistrationForm, LoginForm, UpdateAccountForm, EditEventForm, AddUserForm
 from application.models import Users, Events, Groups
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -128,8 +128,9 @@ def create_event():
 @login_required
 def delete_event(id):
     current = Events.query.get(id)
-    group = Groups.query.filter_by(event_id=id).first()
-    db.session.delete(group)
+    group = Groups.query.filter_by(event_id=id).all()
+    for group in group:
+        db.session.delete(group)
     db.session.delete(current)
     db.session.commit()
     return(redirect(url_for('home')))
@@ -164,3 +165,28 @@ def event_view(id):
         return render_template('view_event.html', title=event.events.title, event=event)
     else:
         return redirect(url_for('home'))
+
+
+@app.route('/event/add/user/<int:id>', methods=['GET', 'POST'])
+@login_required
+def add_user(id):
+    form = AddUserForm()
+    event = Groups.query.filter_by(
+        user_id=current_user.id,
+        event_id=id
+    ).first()
+
+    if event:
+        if request.method == 'POST' or form.validate_on_submit():
+            add_user = Users.query.filter_by(
+                user_name=form.user_name.data).first()
+            new_group = Groups(
+                user_id=add_user.id,
+                event_id=id
+            )
+            db.session.add(new_group)
+            db.session.commit()
+            return redirect(url_for('event_view', id=id))
+    else:
+        return redirect(url_for('home'))
+    return render_template('add_user_event.html', title=event.events.title, form=form)

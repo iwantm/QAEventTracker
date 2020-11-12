@@ -67,3 +67,8 @@ class EditEventForm(FlaskForm):
     description = StringField('Event Description')
     date = DateTimeField('Date of Event', format='%d/%m/%Y')
     submit = SubmitField('Edit Event')
+
+
+class AddUserForm(FlaskForm):
+    user_name = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField('Add User')
