@@ -139,7 +139,7 @@ class TestUserForms(TestBase):
         assert new_user != user
         assert new_email != email
 
-    def test_update_user(self):
+    def test_log_out(self):
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('user1')
         self.driver.find_element_by_xpath(
