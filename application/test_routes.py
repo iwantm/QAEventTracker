@@ -5,7 +5,7 @@ from application.models import Users, Events, Groups
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-@app.route('/auto_login')
+@app.route('/test/auto_login')
 def auto_login():
     user = (Users
             .query

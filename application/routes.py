@@ -21,7 +21,7 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' or form.validate_on_submit():
         hashed_pass = bcrypt.generate_password_hash(form.password.data)
         new_user = Users(
             user_name=form.user_name.data,
@@ -37,13 +37,17 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
-    if form.validate_on_submit():
+
+    if request.method == "POST" or form.validate_on_submit():
+        app.logger.info('submit' + form.password.data)
         user = Users.query.filter_by(user_name=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
+            app.logger.info('oof')
             return redirect(url_for('home'))
     return render_template('login.html', title='Login', form=form)
 
@@ -76,7 +80,7 @@ def delete_account():
 @login_required
 def update_user():
     form = UpdateAccountForm()
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST' or form.validate_on_submit():
         current_user.user_name = form.user_name.data
         current_user.email = form.email.data
         db.session.commit()
@@ -101,7 +105,7 @@ def view_user():
 @login_required
 def create_event():
     form = EventForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' or form.validate_on_submit():
         new_event = Events(
             title=form.title.data,
             description=form.description.data,
@@ -136,7 +140,7 @@ def delete_event(id):
 def edit_event(id):
     form = EditEventForm()
     current = Events.query.get(id)
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST' or form.validate_on_submit():
         current.title = form.title.data
         current.description = form.description.data
         current.date = form.date.data
