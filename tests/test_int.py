@@ -31,7 +31,7 @@ class TestBase(LiveServerTestCase):
         chrome_options = Options()
         chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument('--headless')
-        chrome_options.add_argument("--remote-debugging-port=9222")  # this
+        chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.add_argument("–no-sandbox")
         self.driver = webdriver.Chrome(
             executable_path="/home/iwantm/QA/chromedriver", chrome_options=chrome_options)
@@ -48,8 +48,14 @@ class TestBase(LiveServerTestCase):
 class TestRegistration(TestBase):
 
     def test_registration(self):
-        response = urlopen("http://localhost:5000")
-        self.assertEqual(response.code, 200)
+
+        # Click register menu link
+        self.driver.find_element_by_xpath(
+            "/html/body/div/form/a").click()
+        time.sleep(1)
+
+        # Assert that browser redirects to login page
+        assert url_for('register') in self.driver.current_url
 
 
 if __name__ == '__main__':
