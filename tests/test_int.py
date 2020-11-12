@@ -265,7 +265,7 @@ class TestEventForms(TestBase):
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[3]').click()
         groups = Groups.query.filter_by(event_id=1)
-        assert groups.len() == 2
+        assert len(groups) == 2
         assert url_for('event_view', id=1) in self.driver.current_url
 
 
