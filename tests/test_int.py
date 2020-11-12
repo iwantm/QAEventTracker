@@ -116,7 +116,11 @@ class TestUserForms(TestBase):
             '/html/body/div/nav/ul[2]/li/a').click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').clear()
+        self.driver.find_element_by_xpath(
             '/html/body/div/form/input[2]').send_keys('user_1-updated')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').clear()
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[3]').send_keys('updated@email.test')
         self.driver.find_element_by_xpath(
@@ -124,7 +128,8 @@ class TestUserForms(TestBase):
         time.sleep(1)
         assert url_for('view_user') in self.driver.current_url
         idk = self.driver.find_element_by_xpath(
-            '/html/body/div/div[1]/div/h1').text()
+            '/html/body/div/div[1]/div/h1').text
+        print(idk)
         print(self.driver.current_url)
         assert False
 
