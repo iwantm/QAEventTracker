@@ -34,7 +34,7 @@ class TestBase(LiveServerTestCase):
         chrome_options.add_argument("--remote-debugging-port=9222")
         chrome_options.add_argument("–no-sandbox")
         self.driver = webdriver.Chrome(
-            executable_path=getenv('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
+            executable_path=getenv('CHROMEDRIVER_PATH'), options=chrome_options)
         self.driver.get("http://localhost:5000")
         db.drop_all()
         db.create_all()
@@ -218,6 +218,31 @@ class TestEventForms(TestBase):
         events = Events.query.all()
         assert url_for('home') in self.driver.current_url
         assert event not in events
+
+    def test_delete_event(self):
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('user1')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[3]').send_keys('password')
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[4]').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/table/tbody/tr[1]/td[3]/a').click()
+        time.sleep(1)
+        event_text = self.driver.find_element_by_xpath(
+            '/html/body/div/div[1]/div/h1').text
+        self.driver.find_element_by_xpath(
+            '/html/body/div/nav/ul[2]/li/a').click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').clear()
+        self.driver.find_element_by_xpath(
+            '/html/body/div/form/input[2]').send_keys('edit event')
+        assert url_for('event', id=1) in self.driver.current_url
+        edit_event_text = self.driver.find_element_by_xpath(
+            '/html/body/div/div[1]/div/h1').text
+        assert edit_event_text != event_text
 
 
 if __name__ == '__main__':
