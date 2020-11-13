@@ -102,9 +102,9 @@ The full risk assessment can be found [here](https://docs.google.com/spreadsheet
 Pytest is used for unit testing the application. These tests are designed to check that the outputs from the endpoints of the application are correct. These are then used to produce a report allowing me to check the coverage of the tests. This allows me to check which endpoints of the application still need testing. This was used to check that the correct data is being sent to the front end and that the correct data is being created in the database when routes are used. The problem with unit testing this application was that I had to turn validation off on the forms to allow for post requests to work. This meant that the finished application and the unit tested application were slightly different. There's a seperate **unit-testing** branch that has the changes made to the application to allow for unit testing to work.
 ![Imgur](https://i.imgur.com/UxBaUiv.png)
 Pytest also allows you to produce a coverage report in HTML to show how far the app has been tested. 
-![Imgur](https://i.imgur.com/cFEM6td.png)
-This is the HTML coverage report with the changes made to the application. This wasn't the final coverage as it meant that forms weren't validated.
-
+![Imgur](https://i.imgur.com/IWLnB3b.png)
+This is the HTML coverage report with the changes made to the application. This wasn't the final coverage as it meant that forms weren't validated. Because of the problems I faced with form validation in unit testing, forms.py isnt tested fully by the unit tests either.
+![Imgur](https://i.imgur.com/6xXyfZN.png)
 This is the coverage report with the tests removed as the post request didn't work correctly with form validation on. Although it's not shown in the report, the views that aren't covered are tested using integration testing.
 ### Integration Testing
 Selenium is used for integration testing. As unit testing doesn't allow for the front-end to be tested as the user would see it, this is used to check if the routes work as expected when controlled how a user would interact with the website. This is done using the chromedriver and chromium to interact with the various front-end elements. In this project integration testing is used to test every form within the project.
