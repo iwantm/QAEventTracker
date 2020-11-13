@@ -3,10 +3,31 @@
 
 <form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.user_name(class="form-control mt-2",placeholder="Username")}}
-    {{form.email(class="form-control mt-2",placeholder="name@example.com")}}
+    {{form.user_name(class="form-control mt-2 " +("is-invalid" if form.user_name.errors else ""),placeholder="Username")}}
+    {% if form.user_name.errors %}
+    {% for error in form.user_name.errors %}
+    <div class="invalid-feedback mt-2">
+        <h6>{{ error }}</h6>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {{form.email(class="form-control mt-2 "+("is-invalid" if form.email.errors else ""),placeholder="name@example.com")}}
+    {% if form.email.errors %}
+    {% for error in form.email.errors %}
+    <div class="invalid-feedback mt-2">
+        <h6>{{ error }}</h6>
+    </div>
+    {% endfor %}
+    {% endif %}
     {{form.password(class="form-control mt-2", placeholder="Password")}}
-    {{form.confirm_password(class="form-control mt-2", placeholder="Confirm Password")}}
+    {{form.confirm_password(class="form-control mt-2 " + ("is-invalid" if form.confirm_password.errors else ""), placeholder="Confirm Password")}}
+    {% if form.confirm_password.errors %}
+    {% for error in form.confirm_password.errors %}
+    <div class="invalid-feedback mt-2">
+        <h6>{{ error }}</h6>
+    </div>
+    {% endfor %}
+    {% endif %}
     {{ form.submit(class="btn btn-outline-success btn-block mt-2") }}
     <a class="btn btn-outline-primary btn-block" href="{{url_for('login')}}">Back to login</a>
 
