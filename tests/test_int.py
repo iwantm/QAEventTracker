@@ -10,9 +10,6 @@ from selenium.webdriver.chrome.options import Options
 from application import app, db, bcrypt
 from application.models import Users, Events, Groups
 from datetime import datetime
-test_admin_user_name = "admin"
-test_admin_email = "admin@email.com"
-test_admin_password = "admin2020"
 
 
 class TestBase(LiveServerTestCase):
@@ -78,13 +75,13 @@ class TestUserForms(TestBase):
             "/html/body/div/form/a").click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
-            '/html/body/div/form/input[2]').send_keys(test_admin_user_name)
+            '/html/body/div/form/input[2]').send_keys('new_user_test')
         self.driver.find_element_by_xpath('/html/body/div/form/input[3]').send_keys(
-            test_admin_email)
+            'testing@testing.me')
         self.driver.find_element_by_xpath('/html/body/div/form/input[4]').send_keys(
-            test_admin_password)
+            'password12')
         self.driver.find_element_by_xpath('/html/body/div/form/input[5]').send_keys(
-            test_admin_password)
+            'password12')
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[6]').click()
         time.sleep(1)
