@@ -11,8 +11,8 @@ from flask_login import login_user, current_user, logout_user, login_required, l
 
 class TestBase(TestCase):
     def create_app(self):
+        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
         app.config.update(
-            SQLALCHEMY_DATABASE_URI="sqlite:///data.db",
             SECRET_KEY="TEST_SECRET_KEY",
             DEBUG=True,
             TESTING=True

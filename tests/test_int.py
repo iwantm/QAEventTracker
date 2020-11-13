@@ -17,8 +17,8 @@ test_admin_password = "admin2020"
 
 class TestBase(LiveServerTestCase):
     def create_app(self):
+        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
         app.config.update(
-            SQLALCHEMY_DATABASE_URI="sqlite:///data.db",
             SECRET_KEY="TEST_SECRET_KEY",
             DEBUG=True,
             TESTING=True
