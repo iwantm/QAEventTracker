@@ -99,31 +99,33 @@ The full risk assessment can be found [here](https://docs.google.com/spreadsheet
 
 ## Testing
 ### Unit Testing
-Pytest is used for unit testing the application. These tests are designed to check that the outputs from the endpoints of the application are correct. These are then used to produce a report allowing me to check the coverage of the tests. This allows me to check which endpoints of the application still need testing.
+Pytest is used for unit testing the application. These tests are designed to check that the outputs from the endpoints of the application are correct. These are then used to produce a report allowing me to check the coverage of the tests. This allows me to check which endpoints of the application still need testing. This was used to check that the correct data is being sent to the front end and that the correct data is being created in the database when routes are used.
 ![Imgur](https://i.imgur.com/UxBaUiv.png)
 Pytest also allows you to produce a coverage report in HTML to show how far the app has been tested.
 ![Imgur](https://i.imgur.com/cFEM6td.png)
 ### Integration Testing
-Selenium is used for integration testing. As unit testing doesn't allow for the front-end to be tested as the user would see it, this is used to check if the routes work as expected when controlled how a user would interact with the website. This is done using the chromedriver and chromium to interact with the various front-end elements.
+Selenium is used for integration testing. As unit testing doesn't allow for the front-end to be tested as the user would see it, this is used to check if the routes work as expected when controlled how a user would interact with the website. This is done using the chromedriver and chromium to interact with the various front-end elements. In this project integration testing is used to test every form within the project.
 
 ## Front-End
 The front-end of the application is built using HTML and the Bootstrap framework. It's functional and allows the user to achieve every thing set out.
 ### Home Page
-
+![Imgur](https://i.imgur.com/zlp0j7a.png?1)
 ### Registration
-
+![Imgur](https://i.imgur.com/vDfTRvF.png?2)
 ### Logging In
-
+![Imgur](https://i.imgur.com/vNNirGg.png?1)
 ### Viewing Account
-
+![Imgur](https://i.imgur.com/75NUlq6.png?1)
 ### Editing Account
-
+![Imgur](https://i.imgur.com/AZOHUpP.png?1)
 ### Adding Event
-
+![Imgur](https://i.imgur.com/fpPha2e.png?1)
 ### Viewing Event
-
+![Imgur](https://i.imgur.com/i1Xc042.png?1)
 ### Editing Event
-
+![Imgur](https://i.imgur.com/lAXD2ZD.png?1)
+### Adding User to Event
+![Imgur](https://i.imgur.com/0V5rnKL.png?1)
 ## Improvements
 There are a number of improvements that could be made to the application to make for a better user experience:
 - Implementation of groups (properly) to allow for a user to select a group and then invite all members of that group.
