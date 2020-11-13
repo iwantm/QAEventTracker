@@ -86,7 +86,7 @@ class TestUserForms(TestBase):
             '/html/body/div/form/input[6]').click()
         time.sleep(1)
         users = Users.query.all()
-        user = Users.query.filter_by(user_name=test_admin_user_name).first()
+        user = Users.query.filter_by(user_name='newusertest').first()
         print(user)
         assert user in users
         assert url_for('home') in self.driver.current_url
