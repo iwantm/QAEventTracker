@@ -21,7 +21,7 @@ def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == 'POST' or form.validate_on_submit():
         hashed_pass = bcrypt.generate_password_hash(form.password.data)
         new_user = Users(
             user_name=form.user_name.data.lower(),
@@ -42,7 +42,7 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
 
-    if request.method == "POST" and form.validate_on_submit():
+    if request.method == "POST" or form.validate_on_submit():
         app.logger.info('submit' + form.password.data)
         user = Users.query.filter_by(user_name=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -177,7 +177,7 @@ def add_user(id):
     ).first()
 
     if event:
-        if request.method == 'POST' and form.validate_on_submit():
+        if request.method == 'POST' or form.validate_on_submit():
             add_user = Users.query.filter_by(
                 user_name=form.user_name.data).first()
             new_group = Groups(
