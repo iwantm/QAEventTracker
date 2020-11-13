@@ -20,6 +20,7 @@ class TestBase(TestCase):
         return app
 
     def setUp(self):
+        db.drop_all()
         db.create_all()
         new_user1 = Users(user_name='user1',
                           email='user1@user.com',

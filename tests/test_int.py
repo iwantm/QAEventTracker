@@ -17,8 +17,8 @@ test_admin_password = "admin2020"
 
 class TestBase(LiveServerTestCase):
     def create_app(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
         app.config.update(
+            SQLALCHEMY_DATABASE_URI="sqlite:///data.db",
             SECRET_KEY="TEST_SECRET_KEY",
             DEBUG=True,
             TESTING=True
@@ -36,7 +36,6 @@ class TestBase(LiveServerTestCase):
         self.driver = webdriver.Chrome(
             executable_path=getenv('CHROMEDRIVER_PATH'), options=chrome_options)
         self.driver.get("http://localhost:5000")
-        db.drop_all()
         db.create_all()
         new_user1 = Users(user_name='user1',
                           email='user1@user.com',
@@ -61,11 +60,14 @@ class TestBase(LiveServerTestCase):
                             event_id=new_event2.id)
         db.session.add(new_group1)
         db.session.add(new_group2)
+
         db.session.commit()
 
     def tearDown(self):
+        db.session.remove()
         self.driver.quit()
         db.drop_all()
+
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
 
