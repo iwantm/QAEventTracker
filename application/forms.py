@@ -16,7 +16,9 @@ class CheckIfUserExists:
         self.message = message
 
     def __call__(self, form, field):
-        raise ValidationError(self.message)
+        user = Users.query.filter_by(user_name=field.data.lower()).first()
+        if not user:
+            raise ValidationError(self.message)
 
 
 class CheckIfUsernameIsTaken:
