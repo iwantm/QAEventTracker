@@ -75,20 +75,17 @@ class TestUserForms(TestBase):
             "/html/body/div/form/a").click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
-            '/html/body/div/form/input[2]').send_keys('newusertest')
+            '/html/body/div/form/input[2]').send_keys('user3')
         self.driver.find_element_by_xpath('/html/body/div/form/input[3]').send_keys(
             'testing@testing.me')
         self.driver.find_element_by_xpath('/html/body/div/form/input[4]').send_keys(
-            'password12')
+            'password3')
         self.driver.find_element_by_xpath('/html/body/div/form/input[5]').send_keys(
-            'password12')
+            'password3')
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[6]').click()
         time.sleep(1)
-        users = Users.query.all()
-        user = Users.query.filter_by(user_name='newusertest').first()
-        print(user)
-        assert user in users
+        print(self.driver.current_url)
         assert url_for('home') in self.driver.current_url
 
     def test_login(self):
