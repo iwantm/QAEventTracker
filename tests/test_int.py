@@ -10,9 +10,6 @@ from selenium.webdriver.chrome.options import Options
 from application import app, db, bcrypt
 from application.models import Users, Events, Groups
 from datetime import datetime
-test_admin_user_name = "admin"
-test_admin_email = "admin@email.com"
-test_admin_password = "admin2020"
 
 
 class TestBase(LiveServerTestCase):
@@ -36,7 +33,6 @@ class TestBase(LiveServerTestCase):
         self.driver = webdriver.Chrome(
             executable_path=getenv('CHROMEDRIVER_PATH'), options=chrome_options)
         self.driver.get("http://localhost:5000")
-        db.drop_all()
         db.create_all()
         new_user1 = Users(user_name='user1',
                           email='user1@user.com',
@@ -61,11 +57,14 @@ class TestBase(LiveServerTestCase):
                             event_id=new_event2.id)
         db.session.add(new_group1)
         db.session.add(new_group2)
+
         db.session.commit()
 
     def tearDown(self):
+        db.session.remove()
         self.driver.quit()
         db.drop_all()
+
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
 
@@ -76,20 +75,17 @@ class TestUserForms(TestBase):
             "/html/body/div/form/a").click()
         time.sleep(1)
         self.driver.find_element_by_xpath(
-            '/html/body/div/form/input[2]').send_keys(test_admin_user_name)
+            '/html/body/div/form/input[2]').send_keys('user3')
         self.driver.find_element_by_xpath('/html/body/div/form/input[3]').send_keys(
-            test_admin_email)
+            'testing@testing.me')
         self.driver.find_element_by_xpath('/html/body/div/form/input[4]').send_keys(
-            test_admin_password)
+            'password3')
         self.driver.find_element_by_xpath('/html/body/div/form/input[5]').send_keys(
-            test_admin_password)
+            'password3')
         self.driver.find_element_by_xpath(
             '/html/body/div/form/input[6]').click()
         time.sleep(1)
-        users = Users.query.all()
-        user = Users.query.filter_by(user_name=test_admin_user_name).first()
-        print(user)
-        assert user in users
+        print(self.driver.current_url)
         assert url_for('home') in self.driver.current_url
 
     def test_login(self):
