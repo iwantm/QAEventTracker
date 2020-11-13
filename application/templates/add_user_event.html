@@ -2,7 +2,14 @@
 {% block content %}
 <form class="form-group" method="POST" action=''>
     {{form.hidden_tag()}}
-    {{form.user_name(class="form-control mt-2",placeholder="Username")}}
+    {{form.user_name(class="form-control mt-2 " +("is-invalid" if form.user_name.errors else ""),placeholder="Username")}}
+    {% if form.user_name.errors %}
+    {% for error in form.user_name.errors %}
+    <div class="invalid-feedback mt-2">
+        <h6>{{ error }}</h6>
+    </div>
+    {% endfor %}
+    {% endif %}
     {{form.submit(class="btn btn-outline-success btn-block mt-2")}}
 </form>
 {% endblock content %}
