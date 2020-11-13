@@ -8,71 +8,17 @@ from flask_login import current_user
 from string import punctuation
 
 
-class CheckIfUserExists:
-    def __init__(self, message=None):
-        self.users = Users.query.all()
-        if not message:
-            message = "User doesn't exist"
-        self.message = message
-
-    def __call__(self, form, field):
-        user = Users.query.filter_by(user_name=field.data.lower()).first()
-        if not user:
-            raise ValidationError(self.message)
-
-
-class CheckIfUsernameIsTaken:
-    def __init__(self, message=None):
-        self.users = Users.query.all()
-        if not message:
-            message = 'Username Taken'
-        self.message = message
-
-    def __call__(self, form, field):
-        for user in self.users:
-            if field.data.lower() == user.user_name.lower():
-                raise ValidationError(self.message)
-
-
-class CheckIfEmailIsTaken:
-    def __init__(self, message=None):
-        self.users = Users.query.all()
-        if not message:
-            message = 'Email Taken'
-        self.message = message
-
-    def __call__(self, form, field):
-        for user in self.users:
-            if field.data.lower() == user.email:
-                raise ValidationError(self.message)
-
-
-class CharacterCheckUsername:
-    def __init__(self):
-        self.characters = list(set(punctuation))
-        message = "Username can't contain " + str(self.characters)[1:-1]
-        self.message = message
-
-    def __call__(self, form, field):
-        for letter in field.data.lower():
-            if letter in self.characters:
-                raise ValidationError(self.message)
-
-
 class RegistrationForm(FlaskForm):
     user_name = StringField('Username',
                             validators=[
                                 DataRequired(),
-                                CheckIfUsernameIsTaken(),
-                                Length(min=3, max=15),
-                                CharacterCheckUsername()
+                                Length(min=3, max=15)
                             ]
                             )
 
     email = StringField('Email',
                         validators=[DataRequired(),
-                                    Email(),
-                                    CheckIfEmailIsTaken()
+                                    Email()
                                     ]
                         )
     password = PasswordField('Password',
@@ -88,16 +34,37 @@ class RegistrationForm(FlaskForm):
                                      )
     submit = SubmitField('Sign Up')
 
+    def validate_user_name(self, user_name):
+        user = Users.query.filter_by(user_name=user_name.data).first()
+        idk = user_name.data
+        if user:
+            raise ValidationError('Username Taken')
+
+        for letter in idk:
+            if letter in list(set(punctuation)):
+                raise ValidationError(
+                    "Username can't contain " + str(list(set(punctuation)))[1:-1])
+
+    def validate_email(self, email):
+        user = Users.query.filter_by(email=email.data).first()
+
+        if user:
+            raise ValidationError('Email already in use')
+
 
 class LoginForm(FlaskForm):
     username = StringField('Username',
-                           validators=[DataRequired(),
-                                       CheckIfUserExists(),
+                           validators=[DataRequired()
                                        ]
                            )
     password = PasswordField('Password',
                              validators=[DataRequired()])
     submit = SubmitField('Log In')
+
+    def validate_username(self, username):
+        user = Users.query.filter_by(user_name=username.data.lower()).first()
+        if not user:
+            raise ValidationError("User doesn't exist")
 
 
 class UpdateAccountForm(FlaskForm):
@@ -130,6 +97,10 @@ class EditEventForm(FlaskForm):
 
 
 class AddUserForm(FlaskForm):
-    user_name = StringField('Username', validators=[DataRequired(),
-                                                    CheckIfUserExists()])
+    user_name = StringField('Username', validators=[DataRequired()])
     submit = SubmitField('Add User')
+
+    def validate_user_name(self, user_name):
+        user = Users.query.filter_by(user_name=user_name.data.lower()).first()
+        if not user:
+            raise ValidationError("User doesn't exist")

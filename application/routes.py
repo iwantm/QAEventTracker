@@ -1,7 +1,7 @@
 from application import app, db, bcrypt
 from flask import render_template, redirect, url_for, request
-from application.forms import EventForm, RegistrationForm, LoginForm, UpdateAccountForm, EditEventForm, AddUserForm
 from application.models import Users, Events, Groups
+from application.forms import EventForm, RegistrationForm, LoginForm, UpdateAccountForm, EditEventForm, AddUserForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -177,7 +177,7 @@ def add_user(id):
     ).first()
 
     if event:
-        if request.method == 'POST' or form.validate_on_submit():
+        if request.method == 'POST' and form.validate_on_submit():
             add_user = Users.query.filter_by(
                 user_name=form.user_name.data).first()
             new_group = Groups(
