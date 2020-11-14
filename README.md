@@ -85,7 +85,8 @@ This diagram is the final database structure with the description added to the e
 
 ### CI Pipeline
 For the CI Pipeline I used Jenkins, I used two build steps with the first one being pytest tests with an XML output, and the second one uses Gunicorn to serve the application on port 5000. This gives me a graph on the jenkins home page which shows the tests passed and failed for each build.
-! [Imgur](https://i.imgur.com/w47dFYx.png)
+![Imgur](https://i.imgur.com/w47dFYx.png)
+This is also set up with github hooks, so that in the future when it serves the application in the backgroup it will automatically pull new pushes and run tests before deploying the application
 
 ## Tracking
 [Jira](https://iwanmoreton.atlassian.net/secure/RapidBoard.jspa?projectKey=ET&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYTI3YjZmOWI3MGVhNGQxM2JiMDYyZDY1MTI3MzYzYzciLCJwIjoiaiJ9) was used to track the progress of the project.
