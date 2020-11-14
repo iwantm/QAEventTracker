@@ -85,7 +85,7 @@ This diagram is the final database structure with the description added to the e
 
 ### CI Pipeline
 This will be updated once a CI pipeline is in place
-
+Poll
 
 ## Tracking
 [Jira](https://iwanmoreton.atlassian.net/secure/RapidBoard.jspa?projectKey=ET&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYTI3YjZmOWI3MGVhNGQxM2JiMDYyZDY1MTI3MzYzYzciLCJwIjoiaiJ9) was used to track the progress of the project.
