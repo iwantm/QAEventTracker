@@ -84,8 +84,8 @@ This diagram is how I thought the database would be initially, before I decided 
 This diagram is the final database structure with the description added to the event to allow for more information, the name removed from the user as it wasn't necessary, and the sub-table group added to allow many users to have many events.
 
 ### CI Pipeline
-This will be updated once a CI pipeline is in place
-Poll
+For the CI Pipeline I used Jenkins, I used two build steps with the first one being pytest tests with an XML output, and the second one uses Gunicorn to serve the application on port 5000. This gives me a graph on the jenkins home page which shows the tests passed and failed for each build.
+! [Imgur](https://i.imgur.com/w47dFYx.png)
 
 ## Tracking
 [Jira](https://iwanmoreton.atlassian.net/secure/RapidBoard.jspa?projectKey=ET&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYTI3YjZmOWI3MGVhNGQxM2JiMDYyZDY1MTI3MzYzYzciLCJwIjoiaiJ9) was used to track the progress of the project.
