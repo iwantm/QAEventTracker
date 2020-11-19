@@ -10,4 +10,5 @@ pytest
 pytest-cov
 flask-testing
 selenium 
+cryptography
 gunicorn
