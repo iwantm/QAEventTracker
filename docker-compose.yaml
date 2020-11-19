@@ -20,9 +20,13 @@ services:
     ports:
     - target: 3306
       published: 3306
+    volumes:
+      - type: volume
+        source: mysql
+        target: /var/lib/mysql
     healthcheck:
       test: mysqladmin ping -h localhost --password=${PASS} 
-      timeout: 20s
+      timeout: 60s
       retries: 10
   nginx:
     image: nginx:latest
@@ -36,3 +40,5 @@ services:
       target: /etc/nginx/nginx.conf
     depends_on:
     - 'flask-app'
+volumes:
+  mysql:
